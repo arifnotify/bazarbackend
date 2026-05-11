@@ -2,8 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 
-import * as helmet from 'helmet';
-import * as compression from 'compression';
+import helmet from 'helmet';
+import compression from 'compression';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,17 +13,21 @@ async function bootstrap() {
   });
 
   app.use(helmet());
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   app.use(compression());
 
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
+      transform: true,
     }),
   );
 
-  await app.listen(process.env.PORT || 3000);
+  const port = process.env.PORT || 3000;
 
-  console.log(`Server Running On Port ${process.env.PORT}`);
+  await app.listen(port);
+
+  console.log(`🚀 Server Running On Port ${port}`);
 }
 
 bootstrap();
