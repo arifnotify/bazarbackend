@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 
-import helmet from 'helmet';
+import * as helmet from 'helmet';
 import * as compression from 'compression';
 
 async function bootstrap() {
@@ -13,7 +13,6 @@ async function bootstrap() {
   });
 
   app.use(helmet());
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   app.use(compression());
 
   app.useGlobalPipes(
