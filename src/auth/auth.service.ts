@@ -11,9 +11,10 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login(phone: string) {
+  async sendOtp(phone: string) {
     let user = await this.usersService.findByPhone(phone);
 
+    // AUTO SIGNUP
     if (!user) {
       user = await this.usersService.createUser(phone);
     }
@@ -22,6 +23,7 @@ export class AuthService {
 
     await this.usersService.saveOtp(phone, otp);
 
+    // TEMPORARY
     console.log('OTP:', otp);
 
     return {
@@ -51,6 +53,7 @@ export class AuthService {
 
     return {
       success: true,
+      message: 'Login Successful',
       token,
       user,
     };

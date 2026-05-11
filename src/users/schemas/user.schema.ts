@@ -39,9 +39,19 @@ export class User {
   otp!: string;
 
   @Prop({
+    default: '',
+  })
+  address!: string;
+
+  @Prop({
     default: 'user',
   })
   role!: string;
+
+  @Prop({
+    default: true,
+  })
+  isActive!: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
