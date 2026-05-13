@@ -10,8 +10,6 @@ export class ReviewsService {
   constructor(
     @InjectModel(Review.name)
     private reviewModel: Model<ReviewDocument>,
-
-    private productService: any,
   ) {}
 
   // Add Review
